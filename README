@@ -1,0 +1,58 @@
+diff --git a/README b/README
+index 08e53c6..95e04fd 100644
+--- a/README
++++ b/README
+@@ -1,43 +1,15 @@
+-This is an experimental build system for media drivers.
+-All files on this tree are covered by GPLv2, as stated at COPYING file.
++This was an experimental build system for media drivers, allowing media drivers
++from mainline to be backported to older kernels.
+ 
+-Usage:
++However, to maintain this took too much time and effort for little gain. Few
++if any new PCI(e) or USB drivers have been added to mainline in a long time,
++almost all effort is happening for embedded systems.
+ 
+-Just call the build utility:
+-	$ ./build
++In addition, it was only compile tested, and not whether it would actually work.
+ 
+-Then, install the drivers as root, with:
+-	# make install
++So the decision was made to stop maintaining this.
+ 
+-In order to test, unload old drivers with:
+-	# make rmmod
++If someone would want to take over maintainership, then post a message to the
++linux-media@vger.kernel.org mailinglist.
+ 
+-Then modprobe the driver you want to test. For example, to load driver 'foo':
+-	# modprobe foo
+-
+-
+-If you're developing a new driver or patch, it is better to use:
+-	$ ./build --main-git
+-
+-Then, install the drivers as root, with:
+-	# make install
+-
+-In order to test, unload old drivers with:
+-	# make rmmod
+-
+-Then modprobe the driver you want to test. For example:
+-	# modprobe bttv
+-
+-In this case, in order to modify something, you should edit the file at
+-the media/ subdir.
+-
+-For example, a typical procedure to develop a new patch would be:
+-
+-	~/media_build $ cd media
+-	~/media $ gedit drivers/media/video/foo.c
+-	~/media $ make -C ../v4l
+-	~/media $ make -C .. rmmod
+-	~/media $ modprobe foo
+-	(some procedure to test the "foo" driver)
+-	~/media $ git diff >/tmp/my_changes.patch
+-	(email /tmp/my_changes.patch inlined to linux-media@vger.kernel.org)
++Hans Verkuil <hverkuil@xs4all.nl>
